@@ -7,10 +7,15 @@ import "./App.css";
 
 function App() {
   const [web3, setWeb3] = useState(null);
+  const [accounts, setaccounts] = useState(null);
+
+  const setAddress = (address) => {
+    setaccounts(address);
+  };
   useEffect(() => {
     const init = async () => {
       try {
-        const web3 = new Web3("http://127.0.0.1:7545");
+        const web3 = new Web3("HTTP://127.0.0.1:7545");
         setWeb3(web3);
         // console.log(state);
       } catch (error) {
@@ -26,13 +31,13 @@ function App() {
         <Welcome />
       </div>
       <div className="Account">
-        <Accounts />
+        <Accounts setAddress={setAddress} web3={web3} />
       </div>
 
       <div>
-        <SendEther />
+        <SendEther accounts={accounts} web3={web3} />
       </div>
     </div>
   );
-};
+}
 export default App;
